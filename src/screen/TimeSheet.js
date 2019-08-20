@@ -158,7 +158,7 @@ export default class TimeSheet extends Component {
       var CalYear = date.getFullYear()
       var CalFullDate = CalYear +'-'+ CalMonth +'-'+ Caldate
 
-      var API = 'http://192.168.2.23:100/integration/activity/getActivities?date='
+      var API = 'https://onejit.jithpl.com/integration/activity/getActivities?date='
 
     fetch ( API+ CalFullDate , {
         method: 'GET',
@@ -195,7 +195,7 @@ export default class TimeSheet extends Component {
       var CalFullDate = CalYear +'-'+ CalMonth +'-'+ Caldate
     }
 
-      var API = 'http://192.168.2.23:100/integration/timeEntry/getActivitiesForTimeSheet?date='
+      var API = 'https://onejit.jithpl.com/integration/timeEntry/getActivitiesForTimeSheet?date='
 
     fetch ( API+ CalFullDate , {
         method: 'GET',
@@ -256,7 +256,7 @@ export default class TimeSheet extends Component {
   }
   fetchData = async () => {
 
-    var API = 'http://192.168.2.23:100/integration/activity/getActivities?date='
+    var API = 'https://onejit.jithpl.com/integration/activity/getActivities?date='
     var day = new Date().getDate()
     var month = new Date().getMonth() + 1
     var year = new Date().getFullYear()

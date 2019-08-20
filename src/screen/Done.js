@@ -45,7 +45,7 @@ onConfirm(hour, minute) {
 }
 
 onButtonPress (){
-  fetch('http://192.168.2.23:100/integration/timeEntry/saveTimeEntry', {
+  fetch('https://onejit.jithpl.com/integration/timeEntry/saveTimeEntry', {
         method: 'POST',
         headers: {
             'Accept': 'application/json',

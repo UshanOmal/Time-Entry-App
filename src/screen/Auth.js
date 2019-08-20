@@ -82,7 +82,7 @@ class AuthScreen extends Component {
 
     fetchData () {
     const { navigate } = this.props.navigation;
-        fetch('http://192.168.2.23:100/integration/login/getToken', {
+        fetch('https://onejit.jithpl.com/integration/login/getToken', {
             method: 'POST',
             headers: {
                 'Accept': 'application/json',

@@ -33,7 +33,7 @@ export class Postpone extends Component {
 }
 
 onButtonPress () {
-  fetch ('http://192.168.2.23:100/integration/activity/saveActivity', {
+  fetch ('https://onejit.jithpl.com/integration/activity/saveActivity', {
 method: 'POST',
 headers: {
 'Accept': 'application/json',

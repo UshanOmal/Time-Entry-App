@@ -33,17 +33,6 @@ class LoadingPage extends Component {
 
     }
 
-    delete(){
-        db.transaction((tx)=>{
-        tx.executeSql('DELETE FROM users WHERE username=?',[''],(tx,results) =>{
-                // tx.executeSql('SELECT * FROM users',[],(tx,results) =>{
-                //   for(var i=0;i<results.rows.length;i++){
-                //     console.log(results.rows.item(i).username);
-                //   }
-                  
-            })
-        })
-    }
 
     openSuccess() {
         console.log("Database is opened");
@@ -86,7 +75,7 @@ class LoadingPage extends Component {
 
     fetchData (username,password) {
         const { navigate } = this.props.navigation;
-            fetch('http://192.168.2.23:100/integration/login/getToken', {
+            fetch('https://onejit.jithpl.com/integration/login/getToken', {
                 method: 'POST',
                 headers: {
                     'Accept': 'application/json',
