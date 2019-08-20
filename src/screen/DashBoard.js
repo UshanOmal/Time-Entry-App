@@ -71,7 +71,7 @@ componentWillMount() {
 
 fetchData = async () => {
 
-    fetch ('https://onejit.jithpl.com/integration/login/getLoginUser', {
+    fetch ('http://192.168.2.23:100/integration/login/getLoginUser', {
         method: 'GET',
         headers: {
             'Authorization': 'Bearer ' + this.params.TokenDashBoard,
