@@ -3,9 +3,7 @@ import { View, Text, Platform, StyleSheet, TextInput, KeyboardAvoidingView, aler
 import HeadingText from '../UI/components/HeadingText/HeadingText';
 import Button from '../UI/components/Button/Button';
 import { Header } from 'react-navigation';
-//import SQLite from 'react-native-sqlite-storage';
 
-//let db;
 const { width: SCREEN_WIDTH } = Dimensions.get('window');
 var SQLite = require('react-native-sqlite-storage')
 var db = SQLite.openDatabase({ name: "dataDB", createFromLocation: "~data.db" },
@@ -32,7 +30,6 @@ class AuthScreen extends Component {
         this.willFocusSubscription = this.props.navigation.addListener(
             'willFocus',
             () => {
-              //this.fetchData();
             }
           );
       }
@@ -74,8 +71,6 @@ class AuthScreen extends Component {
     }
 
     componentDidMount() {
-        // this.getToken();
-        //this.fetchData();
         db = SQLite.openDatabase({ name: "dataDB", createFromLocation: "~data.db" },
             this.openSuccess, this.openError);
     }
@@ -104,7 +99,6 @@ class AuthScreen extends Component {
                 this.props.navigation.navigate('DashBoard', { TokenDashBoard:Token,UserName});
             }   
         });
-        //  Alert.alert('Please enter valid Username and Password') 
 }
 
   
@@ -121,7 +115,6 @@ class AuthScreen extends Component {
         );
         return (
             <KeyboardAvoidingView style={styles.container} keyboardVerticalOffset = {Header.HEIGHT + 50}>
-            {/* <ImageBackground source = {require ('../UI/components/Image/background.png')} style={styles.backgroundImage}> */}
                 
                 <View style={styles.container1}>
                 {headingText1}
@@ -151,7 +144,6 @@ class AuthScreen extends Component {
                             </View>
                     </View>
                     </View>
-                    {/* </ImageBackground> */}
             </KeyboardAvoidingView>
         );
     }
@@ -202,8 +194,5 @@ const styles = StyleSheet.create({
     textHeading: {
         paddingBottom: 30
     }
-    // backgroundImage: {
-    //     flex: 1,
-    //     resizeMode: 'cover', // or 'stretch'
-    //   }
+    
 })

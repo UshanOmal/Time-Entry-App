@@ -105,52 +105,6 @@ export default class TimeSheet extends Component {
     this.calendar = null;
   }
 
-  // scrollViewRef = (ref) => {
-  //   this.calendar = ref;
-  // }
-
-  // prepareDates = (currentMoment, numberOfDays) => {
-  //   const dates = [];
-  //   for (let i = -2; i < 3; i += 1) {
-  //     const date = moment(currentMoment).add(numberOfDays * i, 'd');
-  //     dates.push(date);
-  //   }
-  //   return dates;
-  // };
- 
-  // generateTimes = () => {
-  //   const times = [];
-  //   for (let i = 0; i < TIME_LABELS_COUNT; i += 1) {
-  //     const minutes = i % 2 === 0 ? '00' : '15';
-  //     const hour = Math.floor(i / 2);
-  //     const time = `${hour}:${minutes}`;
-  //     times.push(time);
-  //   }
-  //   return times;
-  // };
-
-  // scrollEnded = (event) => {
-  //   const { nativeEvent: { contentOffset, contentSize } } = event;
-  //   const { x: position } = contentOffset;
-  //   const { width: innerWidth } = contentSize;
-  //   const newPage = (position / innerWidth) * 5;
-  //   const { onSwipePrev, onSwipeNext, numberOfDays } = this.props;
-  //   const { currentMoment } = this.state;
-  //   requestAnimationFrame(() => {
-  //     const newMoment = moment(currentMoment)
-  //       .add((newPage - 2) * numberOfDays, 'd')
-  //       .toDate();
-
-  //     this.setState({ currentMoment: newMoment });
-
-  //     if (newPage < 2) {
-  //       onSwipePrev && onSwipePrev(newMoment);
-  //     } else if (newPage > 2) {
-  //       onSwipeNext && onSwipeNext(newMoment);
-  //     }
-  //   });
-  // };
-
   getActivtiesByDate = (date) =>{
     if(date != null){
       var Caldate = date.getDate()
@@ -307,11 +261,9 @@ export default class TimeSheet extends Component {
       var SelectDate = this.state.selectDate
       var TokenTimeSheetInternal =  this.params.TokenTimeSheet
       
-    // how to view token import from previous page
     const { navigate } = this.props.navigation;
 
     const { currentMoment } = this.state;
-    // const dates = this.prepareDates(currentMoment, numberOfDays);
     return (
       <View style = {styles.fullView}>
 
@@ -442,13 +394,11 @@ export default class TimeSheet extends Component {
 
 const styles = StyleSheet.create({
   container1: {
-    // flex: 1,
     paddingTop: 10,
     backgroundColor: '#fff',
   },
   container2:
   {
-    // flex: 1,
     width: SCREEN_WIDTH - 2
   },
   item: {
@@ -481,7 +431,6 @@ const styles = StyleSheet.create({
     color: 'black',
     padding: 5,
     backgroundColor: '#E74C3C',
-    // borderColor: 'black',
     width: SCREEN_WIDTH - 5,
     justifyContent: 'center',
     borderWidth: 1,
@@ -515,21 +464,13 @@ const styles = StyleSheet.create({
     backgroundColor: 'black'
   },
   fullView: {
-    // backgroundColor: '#dcdcdc'
   },
   timeSheetStyle: {
-    // borderWidth: 1,
-    // borderColor: 'black',
     backgroundColor: '#B2EBF2',
-    // borderRadius:4,
-    // height: SCREEN_HEIGHT/4
   },
   timeSheetStyle2: {
-    // borderWidth: 0.5,
     paddingBottom: 7,
-    // borderColor: '#F39C12',
     backgroundColor: '#F39C12',
-    // borderRadius: 5,
     height: 28,
     fontSize: 15,
     color: 'black',
@@ -549,11 +490,7 @@ const styles = StyleSheet.create({
     alignItems: 'center'
   },
   TimeSheetContainer: {
-    // alignSelf: 'flex-start',
     position: 'relative',
-    // bottom: 0,
-    // left:0,
-    // right:0
   },
   header: {
     height: 30,
@@ -568,8 +505,6 @@ const styles = StyleSheet.create({
   TimeEntryheader: {
     height: 30,
     flexDirection: 'row',
-    // justifyContent: 'center',
-    // alignItems: 'center',
     backgroundColor: '#A9CCE3',
     color: '#2471A3',
     fontSize: 12,

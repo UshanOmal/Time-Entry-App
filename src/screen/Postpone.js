@@ -24,7 +24,6 @@ export class Postpone extends Component {
   }
 
   static navigationOptions={ 
-    // header:null,
     tabBarVisible:true ,
     title: 'Postpone',
     headerStyle: {
@@ -114,8 +113,6 @@ renderButton () {
               mode="date"
               placeholder="select date"
               format="YYYY-MM-DD"
-              // minDate="2016-05-01"
-              // maxDate="2016-06-01"
               confirmBtnText="Confirm"
               cancelBtnText="Cancel"
               customStyles={{
@@ -128,7 +125,6 @@ renderButton () {
                 dateInput: {
                   marginLeft: 36
                 }
-                // ... You can check the source to find the other keys.
               }}
               onDateChange={(date) => {this.setState({date: date})}}
             />

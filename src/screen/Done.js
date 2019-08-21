@@ -2,16 +2,13 @@ import React, {Component} from 'react';
 import {StyleSheet, Text, View, TextInput, Alert, KeyboardAvoidingView, Dimensions} from 'react-native';
 import Button from '../UI/components/Button/Button';
 import moment from 'moment';
-// import TimePicker from "react-native-24h-timepicker";
 import { Header } from 'react-navigation';
-// import DateTimePicker from '@react-native-community/datetimepicker';
 
 const { width: SCREEN_WIDTH } = Dimensions.get('window');
 const { height: SCREEN_HEIGHT } = Dimensions.get('window');
 
 export class Done extends Component {
 static navigationOptions={ 
-  // header:null,
   tabBarVisible:true ,
   title: 'Done',
   headerStyle: {

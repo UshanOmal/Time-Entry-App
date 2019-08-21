@@ -41,6 +41,18 @@ class LoadingPage extends Component {
     openError(err) {
         console.log("error: ", err);
     }
+    // delete(){
+    //     db.transaction((tx)=>{
+    //         //tx.executeSql('DELETE FROM users WHERE username=?',[this.params.UserName],(tx,results) =>{
+    //         tx.executeSql('DELETE FROM users WHERE username=?',['viet'],(tx,results) =>{
+    //           // tx.executeSql('SELECT * FROM users',[],(tx,results) =>{
+    //           //   for(var i=0;i<results.rows.length;i++){
+    //           //     console.log(results.rows.item(i).username);
+    //           //   }
+                
+    //         })
+    //     })
+    // }
 
     saveUser(){
 
@@ -102,13 +114,12 @@ class LoadingPage extends Component {
 render () {
   return(
     <View>
-      {/* <TouchableOpacity onPress={this.saveData} >
-        <Text>Click me to save data</Text>
-      </TouchableOpacity>
-        
-      <TouchableOpacity onPress={this.displayData}>
-        <Text>Click me to display data</Text>
-      </TouchableOpacity> */}
+        {/* <ImageBackground source = {require('../UI/components/Image/background.png')} style={styles.backgroundImage}> */}
+    
+        {/* <Image 
+                        style={styles.ImageStyle}
+                        source={require('../UI/components/Image/timeEntry.png')}
+                    /> */}
     </View>
   );
 }
