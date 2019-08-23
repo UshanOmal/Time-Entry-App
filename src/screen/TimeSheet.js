@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { StyleSheet, View ,FlatList, Text, ScrollView,AppRegistry, TouchableOpacity,Dimensions, CheckBox,Alert} from 'react-native';
+import { StyleSheet, View, FlatList, Text, ScrollView, AppRegistry, TouchableOpacity, Dimensions, CheckBox, Alert } from 'react-native';
 import Button from '../UI/components/Button/Button';
 import Icon from 'react-native-vector-icons/Ionicons';
 import Modal from "react-native-simple-modal";
@@ -13,7 +13,7 @@ const { height: SCREEN_HEIGHT } = Dimensions.get('screen');
 const TIME_LABELS_COUNT = 48;
 
 export default class TimeSheet extends Component {
-  state = { 
+  state = {
     open: false,
     scrollEnabled: true,
   };
@@ -24,54 +24,54 @@ export default class TimeSheet extends Component {
     this.setState({ open: false });
   };
 
-  openModal = (rowItem) => this.setState({ 
-             open: true ,
-             selectedDescription: rowItem.description,
-             employeeID : rowItem.assigneeID,
-             activityType: rowItem.activityType,
-             selectCode: rowItem.code,
-             selectTimeFrom: rowItem.timeFrom,
-             selectTimeTo: rowItem.timeTo,
-             selectId: rowItem.id,
-             selectIsDone: rowItem.isDone,
-             selectDate: rowItem.date,
-            });
+  openModal = (rowItem) => this.setState({
+    open: true,
+    selectedDescription: rowItem.description,
+    employeeID: rowItem.assigneeID,
+    activityType: rowItem.activityType,
+    selectCode: rowItem.code,
+    selectTimeFrom: rowItem.timeFrom,
+    selectTimeTo: rowItem.timeTo,
+    selectId: rowItem.id,
+    selectIsDone: rowItem.isDone,
+    selectDate: rowItem.date,
+  });
 
-  openTimeSheet = (rowItem) => { 
-              
-            var ActivityCategory = '';
-            if(rowItem.activityType == 1){
-              ActivityCategory = 'Metting';
-            }
-            else if(rowItem.activityType ==2){
-              ActivityCategory = 'Call';
-            }
-            else if(rowItem.activityType ==3){
-              ActivityCategory = 'Email';
-            }
-            else if(rowItem.activityType == 4){
-              ActivityCategory = 'Networking';
-            }
-            else if(rowItem.activityType == 5){
-              ActivityCategory = 'Other';
-            }
+  openTimeSheet = (rowItem) => {
 
-             Alert.alert(
-              'Time Entry Details',
-              'Activity Type : '+ActivityCategory+'\n'+'\n'+'Time : '+moment(rowItem.timeFrom).format('HH:mm') +' To '+moment(rowItem.timeTo).format('HH:mm') +'\n'+'\n'+'Description : '+rowItem.description,
-              [
-                {text: 'OK', onPress: () => console.log('OK Pressed')},
-              ],
-              {cancelable: true},
-            );
-             
-             };
+    var ActivityCategory = '';
+    if (rowItem.activityType == 1) {
+      ActivityCategory = 'Metting';
+    }
+    else if (rowItem.activityType == 2) {
+      ActivityCategory = 'Call';
+    }
+    else if (rowItem.activityType == 3) {
+      ActivityCategory = 'Email';
+    }
+    else if (rowItem.activityType == 4) {
+      ActivityCategory = 'Networking';
+    }
+    else if (rowItem.activityType == 5) {
+      ActivityCategory = 'Other';
+    }
+
+    Alert.alert(
+      'Time Entry Details',
+      'Activity Type : ' + ActivityCategory + '\n' + '\n' + 'Time : ' + moment(rowItem.timeFrom).format('HH:mm') + ' To ' + moment(rowItem.timeTo).format('HH:mm') + '\n' + '\n' + 'Description : ' + rowItem.description,
+      [
+        { text: 'OK', onPress: () => console.log('OK Pressed') },
+      ],
+      { cancelable: true },
+    );
+
+  };
 
   closeModal = () => this.setState({ open: false });
-  
-  static navigationOptions={ 
+
+  static navigationOptions = {
     // // header:null,
-    tabBarVisible:true ,
+    tabBarVisible: true,
     title: 'Time Entry Sheet',
     headerStyle: {
       backgroundColor: '#A9CCE3',
@@ -83,24 +83,24 @@ export default class TimeSheet extends Component {
     this.params = this.props.navigation.state.params;
     this.state = {
       selectedDate: new Date(),
-      AllActivities:[],
-      toDayActivity:[],
-      delayedActivities:[],
-      i:'',
-      selectedDescription:'',
-      employeeID:'',
-      activityType:'',
+      AllActivities: [],
+      toDayActivity: [],
+      delayedActivities: [],
+      i: '',
+      selectedDescription: '',
+      employeeID: '',
+      activityType: '',
       selectCode: '',
       selectTimeFrom: '',
       selectTimeTo: '',
       selectId: '',
       selectIsDone: '',
-      selectedDescription:'',
+      selectedDescription: '',
       selectDate: '',
       checked: false,
-      selectedDateFromCalandar:'',
-      todayDate:'',
-      Duration:''
+      selectedDateFromCalandar: '',
+      todayDate: '',
+      Duration: ''
     };
     this.calendar = null;
   }
@@ -117,7 +117,7 @@ export default class TimeSheet extends Component {
   //   }
   //   return dates;
   // };
- 
+
   // generateTimes = () => {
   //   const times = [];
   //   for (let i = 0; i < TIME_LABELS_COUNT; i += 1) {
@@ -151,92 +151,88 @@ export default class TimeSheet extends Component {
   //   });
   // };
 
-  getActivtiesByDate = (date) =>{
-    if(date != null){
+  getActivtiesByDate = (date) => {
+    if (date != null) {
       var Caldate = date.getDate()
       var CalMonth = date.getMonth() + 1
       var CalYear = date.getFullYear()
-      var CalFullDate = CalYear +'-'+ CalMonth +'-'+ Caldate
+      var CalFullDate = CalYear + '-' + CalMonth + '-' + Caldate
 
       var API = 'http://192.168.2.23:100/integration/activity/getActivities?date='
 
-    fetch ( API+ CalFullDate , {
+      fetch(API + CalFullDate, {
         method: 'GET',
         headers: {
-            'Authorization': 'Bearer ' + this.params.TokenTimeSheet,
-            'Accept': 'application/json',
-            'Content-Type': 'application/json'
+          'Authorization': 'Bearer ' + this.params.TokenTimeSheet,
+          'Accept': 'application/json',
+          'Content-Type': 'application/json'
         }
-    })
-    .then((response) => response.json())
-      .then((responseJson) => {
+      })
+        .then((response) => response.json())
+        .then((responseJson) => {
           let ToTestarray = [];
 
-          if(responseJson.message != null)
-            {
-              ToTestarray.push(responseJson.message)
-              this.setState({AllActivities : ToTestarray})
-            }          
-          
-          for (i = 0 ; i < responseJson.activityList.length ; i = i + 1)
-          {
+          if (responseJson.message != null) {
+            ToTestarray.push(responseJson.message)
+            this.setState({ AllActivities: ToTestarray })
+          }
+
+          for (i = 0; i < responseJson.activityList.length; i = i + 1) {
             ToTestarray.push(responseJson.activityList[i]);
           }
-          this.setState({AllActivities : ToTestarray})
+          this.setState({ AllActivities: ToTestarray })
         })
     }
   }
 
-  getTimeSheetByDate = (date) =>{
-    if(date != null){
+  getTimeSheetByDate = (date) => {
+    if (date != null) {
       var Caldate = date.getDate()
       var CalMonth = date.getMonth() + 1
       var CalYear = date.getFullYear()
-      var CalFullDate = CalYear +'-'+ CalMonth +'-'+ Caldate
+      var CalFullDate = CalYear + '-' + CalMonth + '-' + Caldate
     }
 
-      var API = 'http://192.168.2.23:100/integration/timeEntry/getActivitiesForTimeSheet?date='
+    var API = 'http://192.168.2.23:100/integration/timeEntry/getActivitiesForTimeSheet?date='
 
-    fetch ( API+ CalFullDate , {
-        method: 'GET',
-        headers: {
-            'Authorization': 'Bearer ' + this.params.TokenTimeSheet,
-            'Accept': 'application/json',
-            'Content-Type': 'application/json'
-        }
+    fetch(API + CalFullDate, {
+      method: 'GET',
+      headers: {
+        'Authorization': 'Bearer ' + this.params.TokenTimeSheet,
+        'Accept': 'application/json',
+        'Content-Type': 'application/json'
+      }
     })
-    .then((response) => response.json())
+      .then((response) => response.json())
       .then((responseJson) => {
-          
-          let timeSheetarray = [];
-          let duration =0;
-          let hours = 0;
-          let minutes = 0;
-          if(responseJson.message != null)
-          {
-            timeSheetarray.push(responseJson.message)
-            this.setState({TimeSheetarray : timeSheetarray})
-          }
-          for (i = 0 ; i < responseJson.timeSheetList.length ; i = i + 1)
-          {
-              timeSheetarray.push(responseJson.timeSheetList[i]);
 
-               var end = responseJson.timeSheetList[i].timeTo;
-               var start = responseJson.timeSheetList[i].timeFrom;
+        let timeSheetarray = [];
+        let duration = 0;
+        let hours = 0;
+        let minutes = 0;
+        if (responseJson.message != null) {
+          timeSheetarray.push(responseJson.message)
+          this.setState({ TimeSheetarray: timeSheetarray })
+        }
+        for (i = 0; i < responseJson.timeSheetList.length; i = i + 1) {
+          timeSheetarray.push(responseJson.timeSheetList[i]);
 
-              duration = moment(end,"YYYY-MM-DD HH:mm:ss").diff(moment(start,"YYYY-MM-DD HH:mm:ss"));
-              var d = moment.duration(duration);
-              var s = Math.floor(d.asHours()) + moment.utc(duration).format(":mm:ss");
-              hours = d.asHours() + hours;
-              minutes = (d.asMinutes() + minutes)%60;
-            
-          }
-          var workTime =hours+':'+minutes
+          var end = responseJson.timeSheetList[i].timeTo;
+          var start = responseJson.timeSheetList[i].timeFrom;
 
-          this.setState({Duration : workTime})
-          this.setState({TimeSheetarray : timeSheetarray})
-        })
-    
+          duration = moment(end, "YYYY-MM-DD HH:mm:ss").diff(moment(start, "YYYY-MM-DD HH:mm:ss"));
+          var d = moment.duration(duration);
+          var s = Math.floor(d.asHours()) + moment.utc(duration).format(":mm:ss");
+          hours = d.asHours() + hours;
+          minutes = (d.asMinutes() + minutes) % 60;
+
+        }
+        var workTime = hours + ':' + minutes
+
+        this.setState({ Duration: workTime })
+        this.setState({ TimeSheetarray: timeSheetarray })
+      })
+
   }
   componentWillMount() {
     this.fetchData();
@@ -260,34 +256,32 @@ export default class TimeSheet extends Component {
     var day = new Date().getDate()
     var month = new Date().getMonth() + 1
     var year = new Date().getFullYear()
-    var today = year+'-'+month+'-'+day
+    var today = year + '-' + month + '-' + day
 
-    this.setState({todayDate : today})
+    this.setState({ todayDate: today })
 
-    fetch ( API+ today , {
-        method: 'GET',
-        headers: {
-            'Authorization': 'Bearer ' + this.params.TokenTimeSheet,
-            'Accept': 'application/json',
-            'Content-Type': 'application/json'
-        }
+    fetch(API + today, {
+      method: 'GET',
+      headers: {
+        'Authorization': 'Bearer ' + this.params.TokenTimeSheet,
+        'Accept': 'application/json',
+        'Content-Type': 'application/json'
+      }
     })
-    .then((response) => response.json())
+      .then((response) => response.json())
       .then((responseJson) => {
-          
-          let ToTestarray = [];
-          if(responseJson.message != null)
-          {
-            ToTestarray.push(responseJson.message)
-            this.setState({AllActivities : ToTestarray})
-          }
-          for (i = 0 ; i < responseJson.activityList.length ; i = i + 1)
-          {
-            ToTestarray.push(responseJson.activityList[i]);
-          }
-          this.setState({AllActivities : ToTestarray})
-        })
-}
+
+        let ToTestarray = [];
+        if (responseJson.message != null) {
+          ToTestarray.push(responseJson.message)
+          this.setState({ AllActivities: ToTestarray })
+        }
+        for (i = 0; i < responseJson.activityList.length; i = i + 1) {
+          ToTestarray.push(responseJson.activityList[i]);
+        }
+        this.setState({ AllActivities: ToTestarray })
+      })
+  }
   render() {
     const {
       numberOfDays,
@@ -296,26 +290,26 @@ export default class TimeSheet extends Component {
       onEventPress,
       events,
     } = this.props;
-      var SelectedDescription = this.state.selectedDescription
-      var SelectCode = this.state.selectCode
-      var EmployeeID = this.state.employeeID
-      var ActivityType = this.state.activityType
-      var SelectTimeFrom = this.state.selectTimeFrom
-      var SelectTimeTo = this.state.selectTimeTo
-      var SelectId = this.state.selectId
-      var SelectIsDone = this.state.selectIsDone
-      var SelectDate = this.state.selectDate
-      var TokenTimeSheetInternal =  this.params.TokenTimeSheet
-      
+    var SelectedDescription = this.state.selectedDescription
+    var SelectCode = this.state.selectCode
+    var EmployeeID = this.state.employeeID
+    var ActivityType = this.state.activityType
+    var SelectTimeFrom = this.state.selectTimeFrom
+    var SelectTimeTo = this.state.selectTimeTo
+    var SelectId = this.state.selectId
+    var SelectIsDone = this.state.selectIsDone
+    var SelectDate = this.state.selectDate
+    var TokenTimeSheetInternal = this.params.TokenTimeSheet
+
     // how to view token import from previous page
     const { navigate } = this.props.navigation;
 
     const { currentMoment } = this.state;
     // const dates = this.prepareDates(currentMoment, numberOfDays);
     return (
-      <View style = {styles.fullView}>
+      <View style={styles.fullView}>
 
-      <ScrollView>
+        <ScrollView>
           <View style={styles.container1}>
             <CalendarStrip
               selectedDate={this.state.selectedDate}
@@ -333,109 +327,109 @@ export default class TimeSheet extends Component {
                 alert('onSwipeDown');
               }}
               showWeekNumber
-              
+
               markedDate={[this.state.todayDate]}
             />
           </View>
-          <View style = { styles.blank}></View>
-          <Text style = {styles.header}>Tasks</Text>
-          <View style = { styles.blank}></View>
-          <View style = {styles.taskStyle}>
-            <View style= {styles.container2}>
-              <View style = { styles.item } 
-              scrollEnabled={this.state.scrollEnabled}>
+          <View style={styles.blank}></View>
+          <Text style={styles.header}>Tasks</Text>
+          <View style={styles.blank}></View>
+          <View style={styles.taskStyle}>
+            <View style={styles.container2}>
+              <View style={styles.item}
+                scrollEnabled={this.state.scrollEnabled}>
                 <FlatList
-                  style = {styles.listTask}
+                  style={styles.listTask}
                   scrollEnabled={this.state.scrollEnabled}
                   data={this.state.AllActivities}
-                  renderItem={({item}) => 
+                  renderItem={({ item }) =>
                     <TouchableOpacity onPress={() => this.openModal(item)}>
                       <View style={{ flexDirection: 'row' }}
-        
+
                         value={this.state.checked}
                         onValueChange={() => this.setState({ checked: !this.state.checked })}>
-                        {item == 'No Activies found'?<Text style = { styles.text3  } onPress={() => this.closeModal()}>No Activties Found</Text> : null}
-                        {item.isDelayed == true && item != 'No Activies found'?  <Text style = { styles.text2 }>{item.description} : {moment(item.date).format('YYYY-MM-DD')} / {moment(item.timeFrom).format('HH:mm')}</Text> : null}
-                        {item.isDelayed == false && item != 'No Activies found'?<Text style = { styles.text } >{item.description} : {moment(item.date).format('YYYY-MM-DD')} / {moment(item.timeFrom).format('HH:mm')}</Text> : null}
-                        <View style = { styles.separator }/> 
+                        {item == 'No Activies found' ? <Text style={styles.text3} onPress={() => this.closeModal()}>No Activties Found</Text> : null}
+                        {item.isDelayed == true && item != 'No Activies found' ? <Text style={styles.text2}>{item.description} : {moment(item.date).format('YYYY-MM-DD')} / {moment(item.timeFrom).format('HH:mm')}</Text> : null}
+                        {item.isDelayed == false && item != 'No Activies found' ? <Text style={styles.text} >{item.description} : {moment(item.date).format('YYYY-MM-DD')} / {moment(item.timeFrom).format('HH:mm')}</Text> : null}
+                        <View style={styles.separator} />
                       </View>
                     </TouchableOpacity>
                   }
-                  keyExtractor={({id}, index) => id}
-                  scrollEnabled={true}> 
+                  keyExtractor={({ id }, index) => id}
+                  scrollEnabled={true}>
                 </FlatList>
               </View>
             </View>
             <Modal
-              style = {styles.modelStyle} 
+              style={styles.modelStyle}
               offset={this.state.offset}
               open={this.state.open}
               modalDidOpen={this.modalDidOpen}
               modalDidClose={this.modalDidClose}>
-              <View style = {styles.popupStyle}>
-                <Button style = {{ margin: 5}} onPress = { () => navigate('Done',{SelectedDescription, SelectCode,SelectDate, SelectTimeFrom, SelectTimeTo, SelectId, SelectIsDone, EmployeeID, ActivityType, TokenTimeSheetInternal}) }>
+              <View style={styles.popupStyle}>
+                <Button style={{ margin: 5 }} onPress={() => navigate('Done', { SelectedDescription, SelectCode, SelectDate, SelectTimeFrom, SelectTimeTo, SelectId, SelectIsDone, EmployeeID, ActivityType, TokenTimeSheetInternal })}>
                   <Text> Done </Text>
                 </Button>
               </View>
 
-              <View style = {styles.popupStyle}>
-                <Button style = {{ margin: 5}} onPress = { () => navigate('Postpone', {SelectCode, SelectTimeFrom, SelectTimeTo, SelectedDescription, SelectId, SelectDate, TokenTimeSheetInternal}) }>
+              <View style={styles.popupStyle}>
+                <Button style={{ margin: 5 }} onPress={() => navigate('Postpone', { SelectCode, SelectTimeFrom, SelectTimeTo, SelectedDescription, SelectId, SelectDate, TokenTimeSheetInternal })}>
                   <Text> Postpone </Text>
                 </Button>
               </View>
 
-              <View style = {styles.popupStyle}>
-                <Button style = {{ margin: 5}} onPress = { () => navigate('EditTask') }>
+              <View style={styles.popupStyle}>
+                <Button style={{ margin: 5 }} onPress={() => navigate('EditTask')}>
                   <Text> Edit </Text>
                 </Button>
               </View>
 
-              <View style = {styles.popupStyle}>
-                <Button style = {{ margin: 5}} onPress={this.closeModal}>
+              <View style={styles.popupStyle}>
+                <Button style={{ margin: 5 }} onPress={this.closeModal}>
                   <Text> Cancel </Text>
                 </Button>
               </View>
             </Modal>
           </View>
 
-      <View style = { styles.blank}></View>
-      <Text style = {styles.header}>Time Entry
-      <Text style = {styles.empty}>__________ </Text>                                             
-      <Text style = {styles.TimeEntryheader}>No. Of Work Hour: {this.state.Duration}</Text>
-      </Text>
-      
-      <View style = { styles.blank}></View>
+          <View style={styles.blank}></View>
+          <Text style={styles.header}>Time Entry
+      <Text style={styles.empty}>__________ </Text>
+            <Text style={styles.TimeEntryheader}>No. Of Work Hour: {this.state.Duration}</Text>
+          </Text>
 
-      <View style = {styles.TimeSheetContainer}>
-        <View style = { styles.timeSheetStyle}>
-          <View style={styles2.scrollViewContent}>
-            <View >
-            <FlatList
-                  style = {styles.listTask}
-                  scrollEnabled={this.state.scrollEnabled}
-                  data={this.state.TimeSheetarray}
-                  renderItem={({item}) => 
-                     <TouchableOpacity onPress={() => this.openTimeSheet(item)}>
-                      <View closeModal
-                        value={this.state.checked}
-                        onValueChange={() => this.setState({ checked: !this.state.checked })}>
-                        {/* <Text >{item.activityType}{'\n'}</Text> */}
-                        {item == "No Time Sheet found"?<Text style = { styles.timeSheetStyle2 } onPress={() => this.closeModal()}>Time Sheet Not Available</Text> : null}
-                        {item != "No Time Sheet found"?<Text style = { styles.timeSheetTextStyle }>{moment(item.timeFrom).format('HH:mm')} {item.TimeFromType}: {moment(item.timeTo).format('HH:mm')}{'\n'}</Text>: null}
-                        {item != "No Time Sheet found"?<Text style = { styles.timeSheetTextStyle }>{item.description} </Text>: null}
-                        <View style = { styles2.separator }/> 
-                      </View>
-                     </TouchableOpacity>
-                  }
-                  keyExtractor={({id}, index) => id}
-                  scrollEnabled={true}> 
-                </FlatList>
+          <View style={styles.blank}></View>
+
+          <View style={styles.TimeSheetContainer}>
+            <View style={styles.timeSheetStyle}>
+              <View style={styles2.scrollViewContent}>
+                <View >
+                  <FlatList
+                    style={styles.listTask}
+                    scrollEnabled={this.state.scrollEnabled}
+                    data={this.state.TimeSheetarray}
+                    renderItem={({ item }) =>
+                      <TouchableOpacity onPress={() => this.openTimeSheet(item)}>
+                        <View closeModal
+                          value={this.state.checked}
+                          onValueChange={() => this.setState({ checked: !this.state.checked })}>
+                          {/* <Text >{item.activityType}{'\n'}</Text> */}
+                          {item == "No Time Sheet found" ? <Text style={styles.timeSheetStyle2} onPress={() => this.closeModal()}>Time Sheet Not Available</Text> : null}
+                          {item != "No Time Sheet found" ? <Text style={styles.timeSheetTextStyle}>{moment(item.timeFrom).format('HH:mm')} {item.TimeFromType}: {moment(item.timeTo).format('HH:mm')}{'\n'}</Text> : null}
+                          {item != "No Time Sheet found" ? <Text style={styles.timeSheetTextStyle}>{item.description} </Text> : null}
+                          <View style={styles2.separator} />
+                        </View>
+                      </TouchableOpacity>
+                    }
+                    keyExtractor={({ id }, index) => id}
+                    scrollEnabled={true}>
+                  </FlatList>
+                </View>
+              </View>
             </View>
           </View>
-        </View>
+        </ScrollView>
       </View>
-    </ScrollView>
-  </View>
     );
   }
 }
@@ -455,7 +449,7 @@ const styles = StyleSheet.create({
     borderWidth: 1,
     borderRadius: 5,
     width: SCREEN_WIDTH - 5,
-    height:200
+    height: 200
   },
   separator:
   {
@@ -507,7 +501,7 @@ const styles = StyleSheet.create({
   iconStyle: {
     alignSelf: 'flex-end',
     paddingRight: 10
-},
+  },
   popupStyle: {
     alignItems: 'center'
   },
@@ -537,9 +531,9 @@ const styles = StyleSheet.create({
   timeSheetTextStyle: {
     fontSize: 15,
     color: 'black',
-    paddingLeft:5,
-    paddingTop:2,
-    paddingBottom:2
+    paddingLeft: 5,
+    paddingTop: 2,
+    paddingBottom: 2
   },
   blank: {
     height: 15
@@ -563,7 +557,7 @@ const styles = StyleSheet.create({
     backgroundColor: '#A9CCE3',
     color: 'black',
     fontSize: 20,
-    paddingLeft:10,
+    paddingLeft: 10,
   },
   TimeEntryheader: {
     height: 30,
@@ -573,10 +567,10 @@ const styles = StyleSheet.create({
     backgroundColor: '#A9CCE3',
     color: '#2471A3',
     fontSize: 12,
-    paddingLeft:20
+    paddingLeft: 20
   },
-  empty:{
-    color:'#A9CCE3' 
+  empty: {
+    color: '#A9CCE3'
   }
 });
 
