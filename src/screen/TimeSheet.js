@@ -105,52 +105,6 @@ export default class TimeSheet extends Component {
     this.calendar = null;
   }
 
-  // scrollViewRef = (ref) => {
-  //   this.calendar = ref;
-  // }
-
-  // prepareDates = (currentMoment, numberOfDays) => {
-  //   const dates = [];
-  //   for (let i = -2; i < 3; i += 1) {
-  //     const date = moment(currentMoment).add(numberOfDays * i, 'd');
-  //     dates.push(date);
-  //   }
-  //   return dates;
-  // };
-
-  // generateTimes = () => {
-  //   const times = [];
-  //   for (let i = 0; i < TIME_LABELS_COUNT; i += 1) {
-  //     const minutes = i % 2 === 0 ? '00' : '15';
-  //     const hour = Math.floor(i / 2);
-  //     const time = `${hour}:${minutes}`;
-  //     times.push(time);
-  //   }
-  //   return times;
-  // };
-
-  // scrollEnded = (event) => {
-  //   const { nativeEvent: { contentOffset, contentSize } } = event;
-  //   const { x: position } = contentOffset;
-  //   const { width: innerWidth } = contentSize;
-  //   const newPage = (position / innerWidth) * 5;
-  //   const { onSwipePrev, onSwipeNext, numberOfDays } = this.props;
-  //   const { currentMoment } = this.state;
-  //   requestAnimationFrame(() => {
-  //     const newMoment = moment(currentMoment)
-  //       .add((newPage - 2) * numberOfDays, 'd')
-  //       .toDate();
-
-  //     this.setState({ currentMoment: newMoment });
-
-  //     if (newPage < 2) {
-  //       onSwipePrev && onSwipePrev(newMoment);
-  //     } else if (newPage > 2) {
-  //       onSwipeNext && onSwipeNext(newMoment);
-  //     }
-  //   });
-  // };
-
   getActivtiesByDate = (date) => {
     if (date != null) {
       var Caldate = date.getDate()

@@ -116,7 +116,7 @@ export default class DashBoard extends Component {
             </View>
 
             <View style={styles.imageView}>
-              <TouchableOpacity onPress={() => navigate('PushNotification', { TokenTimeSheet })}>
+              <TouchableOpacity onPress={() => navigate('WebSocket', { TokenTimeSheet })}>
                 <Image
                   style={styles.ImageStyle}
                   source={require('../UI/components/Image/pettyCash.png')}

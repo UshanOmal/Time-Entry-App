@@ -6,7 +6,7 @@ import DashBoard from './src/screen/DashBoard';
 import Done from './src/screen/Done';
 import Postpone from './src/screen/Postpone';
 import TimeSheet from './src/screen/TimeSheet';
-// import EditTask from './src/screen/EditTask';
+import WebSocket from './src/screen/WebSocket';
 // import PushNotification from './src/screen/PushNotification';
 
 const MainNavigator = createStackNavigator({
@@ -16,7 +16,7 @@ const MainNavigator = createStackNavigator({
   TimeSheet: {screen: TimeSheet},
   Done: {screen: Done},
   Postpone: {screen: Postpone},
-  // EditTask: {screen: EditTask},
+  WebSocket: {screen: WebSocket},
   // PushNotification: { screen: PushNotification }
 
 });

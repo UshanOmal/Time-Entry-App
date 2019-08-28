@@ -58,12 +58,10 @@ class LoadingPage extends Component {
 
                     //     }
                     // )
-                    console.log('This username is not used ' + len);
                     this.navigate('Auth');
 
                 }
                 else {
-                    console.log('This username is used ' + len);
                     //this.navigate('DashBoard');
                     this.fetchData(results.rows.item(0).username, results.rows.item(0).password);
 

@@ -69,7 +69,6 @@ class AuthScreen extends Component {
                     tx.executeSql(
                         'UPDATE users set  password=? WHERE username=?', [passWord, userName],
                         (tx, results) => {
-                            console.log('This username is used ');
                             alert('User updated successfully');
                         }
                     )
