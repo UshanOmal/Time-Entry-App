@@ -84,6 +84,7 @@ export default class TimeSheet extends Component {
     this.state = {
       selectedDate: new Date(),
       AllActivities: [],
+      TimeSheetDates:[],
       toDayActivity: [],
       delayedActivities: [],
       i: '',
@@ -190,12 +191,14 @@ export default class TimeSheet extends Component {
   }
   componentWillMount() {
     this.fetchData();
+    this.fetchData2();
     this.getTimeSheetByDate(new Date());
 
     this.willFocusSubscription = this.props.navigation.addListener(
       'willFocus',
       () => {
         this.fetchData();
+        this.fetchData2();
         this.getTimeSheetByDate(new Date());
         this.closeModal();
       }
@@ -234,6 +237,28 @@ export default class TimeSheet extends Component {
           ToTestarray.push(responseJson.activityList[i]);
         }
         this.setState({ AllActivities: ToTestarray })
+      })
+  }
+
+  fetchData2 = async () => {
+
+    fetch('https://onejit.jithpl.com/integration/timeEntry/getTimeSheetDates', {
+      method: 'GET',
+      headers: {
+        'Authorization': 'Bearer ' + this.params.TokenTimeSheet,
+        'Accept': 'application/json',
+        'Content-Type': 'application/json'
+      }
+    })
+      .then((response) => response.json())
+      .then((responseJson) => {
+
+        let ToTimesheetDates = [];
+        
+        for (i = 0; i < responseJson.dateList.length; i = i + 1) {
+          ToTimesheetDates.push(responseJson.dateList[i].date);
+        }
+        this.setState({ TimeSheetDates: ToTimesheetDates })
       })
   }
   render() {
@@ -281,8 +306,8 @@ export default class TimeSheet extends Component {
                 alert('onSwipeDown');
               }}
               showWeekNumber
-
               markedDate={[this.state.todayDate]}
+              TimeSheetMarkeDate = {this.state.TimeSheetDates}
             />
           </View>
           <View style={styles.blank}></View>
