@@ -55,8 +55,8 @@ export class Done extends Component {
         ActivityID: this.params.SelectId,
         EmployeeID: this.params.EmployeeID,
         Date: this.params.SelectDate,
-        timeFrom: this.params.SelectTimeFrom,
-        timeTo: this.params.SelectTimeTo,
+        timeFrom: this.state.TimeFrom,
+        timeTo: this.state.TimeTo,
         ActivityType: this.params.ActivityType,
         Description: this.params.SelectedDescription,
         Note: this.state.note,
@@ -112,11 +112,12 @@ export class Done extends Component {
           <View style={styles.descriptionView}>
             <Text style={styles.subTopic}>Note :</Text>
             <TextInput
-              borderBottomWidth={1}
+              borderBottomWidth={1} 
               multiline={true}
               scrollEnabled={this.state.scrollEnabled}
               textAlignVertical='top'
-              height={100}></TextInput>
+              height={100} 
+              onChangeText={(note) => this.setState({ note })}>{this.state.note}</TextInput>
           </View>
 
           <View style={styles.buttonContainer}>

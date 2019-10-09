@@ -174,6 +174,7 @@ export default class TimeSheet extends Component {
 
           var end = responseJson.timeSheetList[i].timeTo;
           var start = responseJson.timeSheetList[i].timeFrom;
+          
 
           duration = moment(end, "YYYY-MM-DD HH:mm:ss").diff(moment(start, "YYYY-MM-DD HH:mm:ss"));
           var d = moment.duration(duration);
