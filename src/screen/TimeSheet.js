@@ -183,7 +183,11 @@ export default class TimeSheet extends Component {
           minutes = (d.asMinutes() + minutes) % 60;
 
         }
-        var workTime = hours + ':' + minutes
+         hours = hours.toFixed(1);
+         //minutes = minutes.toFixed(0);
+         //minutes = parseInt(minutes, 10) /10;
+        //var workTime = hours + ':' + minutes
+        var workTime = hours;
 
         this.setState({ Duration: workTime })
         this.setState({ TimeSheetarray: timeSheetarray })
