@@ -1,23 +1,14 @@
 import React, { Component } from 'react';
-import { View, Image, StyleSheet, Text, Button, Alert, ImageBackground } from 'react-native';
+import { View, Image, StyleSheet, Text, Button, Alert, ImageBackground ,BackHandler  } from 'react-native';
 import { TouchableOpacity } from 'react-native-gesture-handler';
-import TimeSheet from './TimeSheet';
 
 var SQLite = require('react-native-sqlite-storage')
 
 export default class DashBoard extends Component {
 
-
-
   static navigationOptions = {
-    tabBarVisible: true,
-    title: 'DashBoard',
-    headerStyle: {
-      backgroundColor: '#A9CCE3'
-    },
-  }
-
-  componentDidMount() {
+    header: null,
+    tabBarVisible: false
   }
 
   signOut = () => {
@@ -27,12 +18,7 @@ export default class DashBoard extends Component {
 
     db.transaction((tx) => {
       tx.executeSql('DELETE FROM users WHERE username=?', [this.params.UserName], (tx, results) => {
-        //tx.executeSql('DELETE FROM users WHERE username=?',['lakshitha'],(tx,results) =>{
-        // tx.executeSql('SELECT * FROM users',[],(tx,results) =>{
-        //   for(var i=0;i<results.rows.length;i++){
-        //     console.log(results.rows.item(i).username);
-        //   }
-
+      
       })
     })
     this.navigate('Auth');
@@ -54,16 +40,34 @@ export default class DashBoard extends Component {
     this.params = this.props.navigation.state.params,
 
       this.state = {
-        // Token: this.props.navigation.state.params.token,
         user: []
       };
 
   }
-
   componentWillMount() {
     this.fetchData();
+    BackHandler.addEventListener('hardwareBackPress', this.onBackPress);
+  }
+  componentWillUnmount() {
+    BackHandler.removeEventListener('hardwareBackPress', this.onBackPress);
   }
 
+  onBackPress = () => {
+ 
+    //Code to display alert message when use click on android device back button.
+    Alert.alert(
+      ' Exit From OneJit ',
+      ' Do you want to exit ?',
+      [
+        { text: 'Yes', onPress: () => BackHandler.exitApp() },
+        { text: 'No', onPress: () => console.log('NO Pressed') }
+      ],
+      { cancelable: false },
+    );
+ 
+    // Return true to enable back button over ride.
+    return true;
+  }
 
   fetchData = async () => {
 
@@ -81,7 +85,6 @@ export default class DashBoard extends Component {
           user: responseJson
         })
       })
-
   }
 
   render() {
@@ -162,7 +165,6 @@ export default class DashBoard extends Component {
 //export default DashBoard;
 
 const styles = StyleSheet.create({
-
   container: {
     flex: 1,
     backgroundColor: '#dcdcdc'
@@ -190,17 +192,13 @@ const styles = StyleSheet.create({
     flex: 3,
     borderWidth: 2,
     borderColor: '#808B96',
-    // height: '70 %' ,
     justifyContent: 'center',
     alignItems: 'center',
     paddingBottom: 20,
     paddingTop: 20,
-    // backgroundColor: '#ffffff',
     borderRadius: 6
   },
   ImageTextStyle: {
-    // borderWidth: 1,
-    // borderColor: 'green',
     textAlign: 'center',
     fontWeight: 'bold',
     color: 'black'

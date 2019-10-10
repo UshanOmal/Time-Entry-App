@@ -33,7 +33,6 @@ class LoadingPage extends Component {
 
     }
 
-
     openSuccess() {
         console.log("Database is opened");
     }
