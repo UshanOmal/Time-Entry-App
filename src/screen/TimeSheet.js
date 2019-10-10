@@ -58,7 +58,7 @@ export default class TimeSheet extends Component {
 
     Alert.alert(
       'Time Entry Details',
-      'Activity Type : ' + ActivityCategory + '\n' + '\n' + 'Time : ' + moment(rowItem.timeFrom).format('HH:mm') + ' To ' + moment(rowItem.timeTo).format('HH:mm') + '\n' + '\n' + 'Description : ' + rowItem.description,
+      'Activity Type : ' + ActivityCategory + '\n' + '\n' + 'Time : ' + moment(rowItem.timeFrom).format('HH:mm') + ' To ' + moment(rowItem.timeTo).format('HH:mm') + '\n' + '\n' + 'Description : ' + rowItem.description + '\n' + '\n' + 'Note : ' +rowItem.note,
       [
         { text: 'OK', onPress: () => console.log('OK Pressed') },
       ],
